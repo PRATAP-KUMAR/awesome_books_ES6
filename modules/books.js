@@ -1,5 +1,3 @@
-import addToList from './addToList';
-
 class Books {
   constructor() {
     this.data = [];
@@ -8,7 +6,6 @@ class Books {
   addBook(book) {
     this.data.push(book);
     localStorage.setItem('BOOKS', JSON.stringify(this.data));
-    addToList(book);
   }
 
   removeBook(id) {

@@ -1,15 +1,50 @@
-// import Book from './modules/book.js';
 import Books from './modules/books.js';
 import getInput from './modules/getInput.js';
-import addToList from './modules/addToList.js';
 
 const books = new Books();
+
+const awesomeBooks = document.createElement('div');
+awesomeBooks.innerHTML = '';
+
+const addToList = (bookObj) => {
+  const container = document.createElement('div');
+  container.className = 'container';
+  container.setAttribute('id', bookObj.id);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'wrapper';
+  container.appendChild(wrapper);
+
+  const bookName = document.createElement('div');
+  bookName.innerText = bookObj.title;
+  wrapper.appendChild(bookName);
+
+  const byText = document.createElement('div');
+  byText.innerText = 'By';
+  wrapper.appendChild(byText);
+
+  const authName = document.createElement('div');
+  authName.innerText = bookObj.author;
+  wrapper.appendChild(authName);
+
+  const buttonDelete = document.createElement('button');
+  buttonDelete.innerText = 'Remove';
+  container.appendChild(buttonDelete);
+
+  buttonDelete.addEventListener('click', () => {
+    books.removeBook(bookObj.id);
+  });
+
+  awesomeBooks.appendChild(container);
+  const section = document.body.querySelector('#awesome-books');
+  section.appendChild(awesomeBooks);
+};
 
 const addButton = document.getElementById('btn-add');
 addButton.addEventListener('click', () => {
   const book = getInput();
   if ((book.author !== '') && (book.title !== '')) {
     books.addBook(book);
+    addToList(book);
   }
 });
 
