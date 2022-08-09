@@ -1,5 +1,6 @@
 import Books from './modules/books.js';
 import getInput from './modules/getInput.js';
+import { DateTime } from './modules/luxon.js';
 
 const books = new Books();
 
@@ -48,6 +49,12 @@ addButton.addEventListener('click', () => {
   }
 });
 
+const updateTime = () => {
+  const now = DateTime.now();
+  const printDate = document.body.querySelector('header > p');
+  printDate.innerText = now;
+};
+
 window.onload = () => {
   books.data = JSON.parse(localStorage.getItem('BOOKS' || '[]'));
   if (books.data === null) {
@@ -55,6 +62,7 @@ window.onload = () => {
     return;
   }
   books.data.forEach((book) => addToList(book));
+  updateTime();
 };
 
 document.getElementById('list').addEventListener('click', () => {
@@ -66,6 +74,7 @@ document.getElementById('list').addEventListener('click', () => {
   document.getElementById('form-title').style.display = 'none';
   document.getElementById('form').style.display = 'none';
   document.getElementById('section-contact').style.display = 'none';
+  updateTime();
 });
 
 document.getElementById('add').addEventListener('click', () => {
@@ -77,6 +86,7 @@ document.getElementById('add').addEventListener('click', () => {
   document.getElementById('form-title').style.display = 'flex';
   document.getElementById('form').style.display = 'flex';
   document.getElementById('section-contact').style.display = 'none';
+  updateTime();
 });
 
 document.getElementById('contact').addEventListener('click', () => {
@@ -88,4 +98,5 @@ document.getElementById('contact').addEventListener('click', () => {
   document.getElementById('row').style.display = 'none';
   document.getElementById('form-title').style.display = 'none';
   document.getElementById('form').style.display = 'none';
+  updateTime();
 });

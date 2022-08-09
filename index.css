@@ -47,6 +47,11 @@ ul li {
   cursor: pointer;
 }
 
+header > p {
+  text-align: end;
+  padding: 20px 0 20px 20px;
+}
+
 #awesome-books {
   text-align: center;
 }
